@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Recibo de Pagamento de Serviços</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="container">
+    <h1>Recibo de Pagamento de Serviços</h1>
+    <form id="recibo-form">
+      <div class="form-group">
+        <label for="recebemosDe">Recebemos de:</label>
+        <input type="text" id="recebemosDe" name="recebemosDe" required />
+      </div>
+      <div class="form-group">
+        <label for="cpfCnpj">CPF/CNPJ:</label>
+        <input type="text" id="cpfCnpj" name="cpfCnpj" required pattern="[\d\.\-\/]+" title="Digite um CPF ou CNPJ válido" />
+      </div>
+      <fieldset class="form-group">
+        <legend>Serviços:</legend>
+        <label><input type="checkbox" name="servicos" value="Consultoria" /> Consultoria</label>
+        <label><input type="checkbox" name="servicos" value="Desenvolvimento" /> Desenvolvimento</label>
+        <label><input type="checkbox" name="servicos" value="Treinamento" /> Treinamento</label>
+        <label><input type="checkbox" name="servicos" value="Suporte" /> Suporte</label>
+        <label><input type="checkbox" name="servicos" value="Revisão" /> Revisão</label>
+        <label><input type="checkbox" name="servicos" value="Implementação" /> Implementação</label>
+        <label><input type="checkbox" name="servicos" value="Pesquisa" /> Pesquisa</label>
+        <label><input type="checkbox" name="servicos" value="Design" /> Design</label>
+        <label><input type="checkbox" name="servicos" value="Auditoria" /> Auditoria</label>
+        <label><input type="checkbox" name="servicos" value="Marketing" /> Marketing</label>
+      </fieldset>
+      <div class="form-group">
+        <label for="valor">Valor (R$):</label>
+        <input type="number" id="valor" name="valor" min="0" step="0.01" required />
+      </div>
+      <div class="form-group">
+        <label for="total">Total (R$):</label>
+        <input type="text" id="total" name="total" readonly />
+      </div>
+      <div class="form-group">
+        <label for="valorExtenso">Valor por extenso:</label>
+        <textarea id="valorExtenso" name="valorExtenso" rows="2" readonly></textarea>
+      </div>
+      <button type="submit">Gerar Recibo</button>
+    </form>
+    <section id="recibo-output" class="recibo-output" hidden>
+      <h2>Recibo Gerado</h2>
+      <div id="recibo-content"></div>
+      <button id="btn-novo">Novo Recibo</button>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
