@@ -98,16 +98,30 @@ document.getElementById("recibo-form").addEventListener("submit", function (e) {
   const total = valor.toFixed(2);
   const valorExtenso = numeroParaExtenso(valor);
 
+  const valorExtensoCapitalizado = valorExtenso.charAt(0).toUpperCase() + valorExtenso.slice(1);
   document.getElementById("total").value = total;
-  document.getElementById("valorExtenso").value = valorExtenso.charAt(0).toUpperCase() + valorExtenso.slice(1);
+  document.getElementById("valorExtenso").value = valorExtensoCapitalizado;
 
-  // Generate receipt content
+  // Obter data atual
+  const hoje = new Date();
+  const dataFormatada = hoje.toLocaleDateString('pt-BR', {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric'
+  });
+
+  // Gerar conteúdo do recibo
   const reciboContent = `
-    <p><strong>Recebemos de:</strong> ${recebemosDe}</p>
-    <p><strong>CPF/CNPJ:</strong> ${cpfCnpj}</p>
-    <p><strong>Serviços:</strong> ${servicos.join(", ")}</p>
-    <p><strong>Valor (R$):</strong> ${total}</p>
-    <p><strong>Valor por extenso:</strong> ${valorExtenso.charAt(0).toUpperCase() + valorExtenso.slice(1)}</p>
+    <strong>RECIBO DE PAGAMENTO</strong>
+    -----------------------------------
+    <strong>Recebemos de:</strong> ${recebemosDe}
+    <strong>CPF/CNPJ:</strong> ${cpfCnpj}
+    <strong>Serviços Prestados:</strong> ${servicos.join(", ")}
+    -----------------------------------
+    <strong>VALOR TOTAL: R$ ${total}</strong>
+    <em>(${valorExtensoCapitalizado})</em>
+    -----------------------------------
+    <strong>Data:</strong> ${dataFormatada}
   `;
 
   document.getElementById("recibo-content").innerHTML = reciboContent;
@@ -121,4 +135,10 @@ document.getElementById("btn-novo").addEventListener("click", function () {
   document.getElementById("valorExtenso").value = "";
   document.getElementById("recibo-output").hidden = true;
   document.getElementById("recibo-form").hidden = false;
+});
+
+document.getElementById("btn-limpar").addEventListener("click", function () {
+  document.getElementById("recibo-form").reset();
+  document.getElementById("total").value = "";
+  document.getElementById("valorExtenso").value = "";
 });
